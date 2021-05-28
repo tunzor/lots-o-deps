@@ -14,4 +14,8 @@ jobs:
       - run:
           name: pip freeze
           command: pip freeze
-      
+
+workflows:
+  deps-and-freeze:
+    jobs:
+      - gather-dependencies-and-freeze
