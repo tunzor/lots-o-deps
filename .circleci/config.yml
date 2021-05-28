@@ -11,7 +11,7 @@ jobs:
             - v1-{{ checksum "requirements.txt" }}
       - run:
           name: Make virtualenv folder and activate
-          command: virtualenv venv && source env/bin/activate
+          command: virtualenv venv && source venv/bin/activate
       - run: 
           name: pip install dependencies
           command: pip install -r requirements.txt
