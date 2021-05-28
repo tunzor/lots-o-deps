@@ -6,15 +6,22 @@ jobs:
     
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - v1-{{ checksum "requirements.txt" }}
       - run:
           name: Make virtualenv folder and activate
-          command: virtualenv env && source env/bin/activate
+          command: virtualenv venv && source env/bin/activate
       - run: 
           name: pip install dependencies
           command: pip install -r requirements.txt
       - run:
           name: pip freeze
           command: pip freeze
+      - save_cache:
+          keys: v1-{{ checksum "requirements.txt" }}
+          paths:
+            - venv
 
 workflows:
   version: 2
