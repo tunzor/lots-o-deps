@@ -16,6 +16,7 @@ jobs:
           command: pip freeze
 
 workflows:
+  version: 2
   deps-and-freeze:
     jobs:
       - gather-dependencies-and-freeze
