@@ -1,13 +1,19 @@
 version: 2
 jobs:
   gather-dependencies-and-freeze:
-    machine: true
+    machine:
+      image: circleci/classic:201808-01
 
     steps:
       - checkout
       - restore_cache:
           keys:
-            - v2-{{ checksum "requirements.txt" }}
+            - v3-{{ checksum "requirements.txt" }}
+      - run:
+          name: Switch to Python 3.7
+          command: |
+            pyenv versions
+            pyenv global 3.7.0
       - run:
           name: Make virtualenv folder and activate
           command: virtualenv venv && source venv/bin/activate
@@ -18,7 +24,7 @@ jobs:
           name: pip freeze
           command: pip freeze
       - save_cache:
-          key: v2-{{ checksum "requirements.txt" }}
+          key: v3-{{ checksum "requirements.txt" }}
           paths:
             - venv
 
