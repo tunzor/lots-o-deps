@@ -1,6 +1,6 @@
 numpy==1.19.5
 pillow==8.2.0
 requests==2.25.1
-pandas==1.2.4
+pandas==1.1.5
 opencv-python==4.5.2.52
 tensorflow==2.5.0
