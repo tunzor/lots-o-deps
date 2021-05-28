@@ -1,25 +1,24 @@
 version: 2
 jobs:
   gather-dependencies-and-freeze:
-    docker:
-      - image: circleci/python:buster
-    
+    machine: true
+
     steps:
       - checkout
       - restore_cache:
           keys:
-            - v1-{{ checksum "requirements.txt" }}
+            - v2-{{ checksum "requirements.txt" }}
       - run:
-          name: Make virtualenv folder
-          command: virtualenv venv
+          name: Make virtualenv folder and activate
+          command: virtualenv venv && source venv/bin/activate
       - run: 
           name: pip install dependencies
-          command: source venv/bin/activate && pip install -r requirements.txt
+          command: pip install -r requirements.txt
       - run:
           name: pip freeze
-          command: source venv/bin/activate && pip freeze
+          command: pip freeze
       - save_cache:
-          key: v1-{{ checksum "requirements.txt" }}
+          key: v2-{{ checksum "requirements.txt" }}
           paths:
             - venv
 
