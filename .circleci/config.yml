@@ -10,14 +10,14 @@ jobs:
           keys:
             - v1-{{ checksum "requirements.txt" }}
       - run:
-          name: Make virtualenv folder and activate
-          command: virtualenv venv && source venv/bin/activate
+          name: Make virtualenv folder
+          command: virtualenv venv
       - run: 
           name: pip install dependencies
-          command: pip install -r requirements.txt
+          command: source venv/bin/activate && pip install -r requirements.txt
       - run:
           name: pip freeze
-          command: pip freeze
+          command: source venv/bin/activate && pip freeze
       - save_cache:
           key: v1-{{ checksum "requirements.txt" }}
           paths:
