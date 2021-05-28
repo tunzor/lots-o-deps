@@ -8,26 +8,21 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v3-{{ checksum "requirements.txt" }}
+            - v4-{{ checksum "requirements.txt" }}
       - run:
           name: Switch to Python 3.7
           command: |
             pyenv versions
             pyenv global 3.7.0
       - run:
-          name: Make virtualenv folder and activate
-          command: virtualenv venv && source venv/bin/activate
-      - run:
-          name: Update pip
-          command: pip install --upgrade pip
-      - run: 
-          name: pip install dependencies
-          command: pip install -r requirements.txt
-      - run:
-          name: pip freeze
-          command: pip freeze
+          name: Install dependencies
+          command: |
+            python -m venv venv
+            . venv/bin/activate
+            pip install --upgrade pip && pip install -r requirements.txt
+            pip freeze
       - save_cache:
-          key: v3-{{ checksum "requirements.txt" }}
+          key: v4-{{ checksum "requirements.txt" }}
           paths:
             - venv
 
