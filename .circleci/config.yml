@@ -5,17 +5,14 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Use python 3
-          command: pyenv global 3.7.0
-      - run:
           name: Make virtualenv folder and activate
           command: virtualenv env && source env/bin/activate
       - run: 
           name: pip install dependencies
-          command: pip install -r requirements.txt
+          command: pip3 install -r requirements.txt
       - run:
           name: pip freeze
-          command: pip freeze
+          command: pip3 freeze
 
 workflows:
   version: 2
