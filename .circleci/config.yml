@@ -19,7 +19,7 @@ jobs:
           name: pip freeze
           command: pip freeze
       - save_cache:
-          keys: v1-{{ checksum "requirements.txt" }}
+          key: v1-{{ checksum "requirements.txt" }}
           paths:
             - venv
 
