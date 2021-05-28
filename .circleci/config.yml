@@ -1,10 +1,12 @@
 version: 2
 jobs:
   gather-dependencies-and-freeze:
-    machine:
-      image: ubuntu-2004:202104-01
+    machine: true
     steps:
       - checkout
+      - run:
+          name: Use python 3
+          command: pyenv global 3.7.0
       - run:
           name: Make virtualenv folder and activate
           command: virtualenv env && source env/bin/activate
